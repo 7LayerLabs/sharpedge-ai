@@ -2,123 +2,82 @@
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--card-border)] bg-[var(--card-bg)]">
-      <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          {/* Brand Column */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-[var(--neon-green)] rounded-sm flex items-center justify-center font-black text-black text-sm">
-                SE
-              </div>
-              <span className="text-lg font-extrabold tracking-tight">
-                Sharp<span className="text-[var(--neon-green)]">Edge</span>
-                <span className="text-[var(--neon-blue)] text-sm font-mono ml-1">
-                  AI
-                </span>
+    <footer className="border-t border-[var(--border)] bg-[var(--bg-deep)]">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-6 py-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Logo */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1.5">
+              <span
+                className="text-[16px] font-[800] tracking-tight text-white"
+                style={{ fontFamily: "'Inter Tight', sans-serif" }}
+              >
+                SHARPEDGE
+              </span>
+              <span className="bg-[var(--accent-green)] text-[#0A0A0F] text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                AI
               </span>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-4">
-              AI-powered sports betting intelligence delivered daily. Data-driven
-              analysis, prop models, and line movement tracking for smarter
-              bettors.
-            </p>
-            <div className="flex gap-4">
-              <a
-                href="#"
-                className="text-gray-500 hover:text-[var(--neon-green)] transition-colors text-sm"
-              >
-                𝕏 Twitter
+            <div className="hidden md:flex items-center gap-4 text-sm text-[var(--text-muted)]">
+              <span>•</span>
+              <a href="#" className="hover:text-[var(--text-secondary)] transition-colors">
+                Terms
               </a>
-              <a
-                href="#"
-                className="text-gray-500 hover:text-[var(--neon-blue)] transition-colors text-sm"
-              >
-                Discord
+              <a href="#" className="hover:text-[var(--text-secondary)] transition-colors">
+                Privacy
               </a>
-              <a
-                href="#"
-                className="text-gray-500 hover:text-[var(--neon-green)] transition-colors text-sm"
-              >
-                Instagram
+              <a href="#" className="hover:text-[var(--text-secondary)] transition-colors">
+                Contact
               </a>
             </div>
           </div>
 
-          {/* Product Column */}
-          <div>
-            <h4 className="font-bold text-sm uppercase tracking-wider text-gray-300 mb-4">
-              Product
-            </h4>
-            <ul className="space-y-2">
-              {[
-                { label: "Features", href: "#features" },
-                { label: "Pricing", href: "#pricing" },
-                { label: "Newsletter Preview", href: "#preview" },
-                { label: "Free Picks", href: "#signup" },
-              ].map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal Column */}
-          <div>
-            <h4 className="font-bold text-sm uppercase tracking-wider text-gray-300 mb-4">
-              Legal
-            </h4>
-            <ul className="space-y-2">
-              {[
-                "Terms of Service",
-                "Privacy Policy",
-                "Responsible Gambling",
-                "Contact Us",
-              ].map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          {/* Social links */}
+          <div className="flex items-center gap-5">
+            <a
+              href="#"
+              className="text-[var(--text-muted)] hover:text-white transition-colors text-sm"
+            >
+              Twitter
+            </a>
+            <a
+              href="#"
+              className="text-[var(--text-muted)] hover:text-white transition-colors text-sm"
+            >
+              Instagram
+            </a>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-[var(--card-border)] pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-gray-600">
-              © 2026 SharpEdge AI. All rights reserved. Built by{" "}
-              <a
-                href="https://github.com/Milobuilds45"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-[var(--neon-green)] transition-colors"
-              >
-                Milobuilds45
-              </a>
+        {/* Mobile links */}
+        <div className="flex md:hidden items-center justify-center gap-4 mt-4 text-sm text-[var(--text-muted)]">
+          <a href="#" className="hover:text-[var(--text-secondary)] transition-colors">
+            Terms
+          </a>
+          <a href="#" className="hover:text-[var(--text-secondary)] transition-colors">
+            Privacy
+          </a>
+          <a href="#" className="hover:text-[var(--text-secondary)] transition-colors">
+            Contact
+          </a>
+        </div>
+
+        {/* Bottom line */}
+        <div className="mt-8 pt-6 border-t border-[var(--border)]">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+            <p className="text-[12px] text-[var(--text-muted)]">
+              © 2026 SharpEdge AI. All rights reserved.
             </p>
-            <p className="text-xs text-gray-600 text-center md:text-right max-w-md">
-              ⚠️ SharpEdge AI provides analysis for entertainment and
-              informational purposes only. Not financial advice. Must be 21+ to
-              place bets. Please gamble responsibly.{" "}
+            <p className="text-[12px] text-[var(--text-muted)] text-center md:text-right max-w-lg">
+              ⚠️ For entertainment purposes only. Not financial advice. 21+ to
+              wager. Please gamble responsibly.{" "}
               <a
                 href="https://www.ncpgambling.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-300"
+                className="hover:text-[var(--text-secondary)] transition-colors underline"
               >
-                National Council on Problem Gambling: 1-800-522-4700
+                1-800-522-4700
               </a>
             </p>
           </div>

@@ -1,27 +1,45 @@
 @import "tailwindcss";
 
+/* Paula's Design Spec — SharpEdge AI Color System */
 :root {
-  --background: #0a0a0f;
-  --foreground: #e8e8ed;
-  --neon-green: #39ff14;
-  --neon-blue: #00d4ff;
-  --neon-green-dim: #1a7a0a;
-  --neon-blue-dim: #006680;
-  --card-bg: #12121a;
-  --card-border: #1e1e2e;
-  --surface: #15151f;
+  /* Backgrounds */
+  --bg-deep: #0A0A0F;
+  --bg-card: #13131A;
+  --bg-elevated: #1A1A2E;
+
+  /* Accents */
+  --accent-green: #00FF87;
+  --accent-blue: #00D4FF;
+  --accent-red: #FF3B5C;
+  --accent-amber: #FFB800;
+  --accent-violet: #8B5CF6;
+  --accent-gold: #FFD700;
+
+  /* Text */
+  --text-primary: #FFFFFF;
+  --text-secondary: #8B8BA3;
+  --text-muted: #4A4A5E;
+
+  /* Borders */
+  --border: #1E1E2E;
+  --border-hover: rgba(0, 255, 135, 0.2);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-neon-green: var(--neon-green);
-  --color-neon-blue: var(--neon-blue);
-  --color-neon-green-dim: var(--neon-green-dim);
-  --color-neon-blue-dim: var(--neon-blue-dim);
-  --color-card-bg: var(--card-bg);
-  --color-card-border: var(--card-border);
-  --color-surface: var(--surface);
+  --color-bg-deep: var(--bg-deep);
+  --color-bg-card: var(--bg-card);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-accent-green: var(--accent-green);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-red: var(--accent-red);
+  --color-accent-amber: var(--accent-amber);
+  --color-accent-violet: var(--accent-violet);
+  --color-accent-gold: var(--accent-gold);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
 }
 
 * {
@@ -33,151 +51,96 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
   overflow-x: hidden;
 }
 
-/* Neon glow effects */
-.glow-green {
-  box-shadow: 0 0 20px rgba(57, 255, 20, 0.3), 0 0 60px rgba(57, 255, 20, 0.1);
-}
-
-.glow-blue {
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 60px rgba(0, 212, 255, 0.1);
-}
-
-.glow-green-text {
-  text-shadow: 0 0 20px rgba(57, 255, 20, 0.5), 0 0 40px rgba(57, 255, 20, 0.2);
-}
-
-.glow-blue-text {
-  text-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.2);
-}
-
-/* Grid background pattern */
+/* Grid background — data/graph-paper aesthetic */
 .grid-bg {
-  background-image: 
-    linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+  background-image:
+    linear-gradient(rgba(0, 255, 135, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 135, 0.025) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
-/* Animated gradient border */
-.gradient-border {
-  position: relative;
-  background: var(--card-bg);
-  border-radius: 12px;
+/* Hero radial glow — per Paula's spec */
+.hero-radial {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 255, 135, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+    var(--bg-deep);
 }
 
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: 13px;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--neon-green), var(--neon-blue), var(--neon-green));
-  background-size: 300% 300%;
-  animation: gradient-shift 4s ease infinite;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+/* Neon green glow on text */
+.glow-green-text {
+  text-shadow: 0 0 30px rgba(0, 255, 135, 0.4), 0 0 60px rgba(0, 255, 135, 0.15);
 }
 
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* CTA pulse — subtle, per spec (3s loop) */
+@keyframes pulse-cta {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 135, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(0, 255, 135, 0.4); }
+}
+.pulse-cta {
+  animation: pulse-cta 3s ease-in-out infinite;
+}
+.pulse-cta:hover {
+  animation: none;
+  box-shadow: 0 0 20px rgba(0, 255, 135, 0.3);
 }
 
-/* Pulse animation for CTA */
-@keyframes pulse-neon {
-  0%, 100% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.4); }
-  50% { box-shadow: 0 0 40px rgba(57, 255, 20, 0.7), 0 0 80px rgba(57, 255, 20, 0.3); }
+/* Scroll bounce indicator */
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+.bounce-down {
+  animation: bounce-down 2s ease-in-out infinite;
 }
 
-.pulse-glow {
-  animation: pulse-neon 2s ease-in-out infinite;
-}
-
-/* Ticker animation */
+/* Ticker marquee */
 @keyframes ticker-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
 .ticker-animate {
-  animation: ticker-scroll 30s linear infinite;
+  animation: ticker-scroll 40s linear infinite;
 }
 
-/* Stats counter glow */
-.stat-number {
-  background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--card-border);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-green-dim);
-}
-
-/* Newsletter preview card styling */
-.newsletter-card {
-  background: linear-gradient(135deg, #12121a 0%, #1a1a2e 100%);
-  border: 1px solid var(--card-border);
-}
-
-/* Hero background radial */
-.hero-radial {
-  background: radial-gradient(ellipse at 50% 0%, rgba(57, 255, 20, 0.08) 0%, rgba(0, 212, 255, 0.04) 40%, transparent 70%);
-}
-
-/* Pricing card popular highlight */
-.pricing-popular {
-  background: linear-gradient(135deg, rgba(57, 255, 20, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);
-  border: 1px solid rgba(57, 255, 20, 0.3);
+/* Count-up numbers glow */
+.stat-green {
+  color: var(--accent-green);
+  text-shadow: 0 0 20px rgba(0, 255, 135, 0.3);
 }
 
 /* Section divider */
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--neon-green-dim), var(--neon-blue-dim), transparent);
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
 }
 
-/* Input focus styles */
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Input focus — green border per spec */
 input:focus {
   outline: none;
-  border-color: var(--neon-green) !important;
-  box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.2);
+  border-color: var(--accent-green) !important;
+  box-shadow: 0 0 0 3px rgba(0, 255, 135, 0.15);
 }
 
-/* Smooth fade-in for sections */
-.fade-in-section {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in-section.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .ticker-animate { animation: none; }
+  .pulse-cta { animation: none; }
+  .bounce-down { animation: none; }
 }

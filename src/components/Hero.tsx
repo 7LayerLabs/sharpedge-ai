@@ -1,99 +1,130 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 export default function Hero() {
-  return (
-    <section className="relative pt-36 sm:pt-40 lg:pt-48 pb-20 lg:pb-32 px-4 overflow-hidden hero-radial">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--neon-green)]/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[var(--neon-blue)]/5 rounded-full blur-[120px]" />
-      </div>
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-      <div className="max-w-5xl mx-auto text-center relative z-10">
-        {/* Badge */}
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) setSubmitted(true);
+  };
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center hero-radial px-5">
+      <div className="max-w-[800px] mx-auto text-center pt-[72px]">
+        {/* Badge — Paula: pill, elevated bg, green border, pulse */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="inline-flex items-center gap-2 bg-[var(--neon-green)]/10 border border-[var(--neon-green)]/20 rounded-full px-4 py-1.5 mb-8"
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="inline-flex items-center gap-2 bg-[var(--bg-elevated)] border border-[rgba(0,255,135,0.3)] rounded-full px-4 py-2 mb-8"
         >
-          <span className="w-2 h-2 bg-[var(--neon-green)] rounded-full animate-pulse" />
-          <span className="text-xs font-semibold text-[var(--neon-green)] uppercase tracking-wider">
-            AI-Powered Betting Intelligence
+          <span className="text-sm animate-pulse">🔥</span>
+          <span className="text-sm font-medium text-white">
+            Super Bowl LX picks are LIVE
           </span>
         </motion.div>
 
-        {/* Main Headline */}
+        {/* Headline — Paula: Inter Tight 800, 64px, "NOW YOU DO TOO." in green */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6"
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+          className="text-[40px] md:text-[56px] lg:text-[64px] leading-[1.1] tracking-[-0.02em] font-[800] mb-6"
+          style={{ fontFamily: "'Inter Tight', sans-serif" }}
         >
-          The house always wins.
+          THE HOUSE ALWAYS WINS.
           <br />
-          <span className="glow-green-text text-[var(--neon-green)]">
-            Now you do too.
+          <span className="text-[var(--accent-green)] glow-green-text">
+            NOW YOU DO TOO.
           </span>
         </motion.h1>
 
-        {/* Sub headline */}
+        {/* Subtext — Paula: Inter 400, 18px, secondary color, max 560px */}
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.6 }}
-          className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+          className="text-base md:text-lg text-[var(--text-secondary)] max-w-[560px] mx-auto mb-10 leading-[1.6]"
         >
-          Every morning, our AI scans lines, models props, and tracks
-          sharp money movement across the entire sports betting market.
-          You get the edge — delivered to your inbox before the books adjust.
+          AI-powered sports betting intelligence that actually gives you an edge.
+          Daily picks, prop models, and line movement analysis — backed by data,
+          not gut feelings.
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* Email form — Paula: single row, input+button as ONE unit, 480px max */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+          id="hero-signup"
         >
-          <a
-            href="#signup"
-            className="w-full sm:w-auto bg-[var(--neon-green)] text-black font-extrabold text-base px-8 py-4 rounded-lg hover:bg-[var(--neon-green)]/90 transition-all pulse-glow"
-          >
-            Get Free Daily Picks →
-          </a>
-          <a
-            href="#preview"
-            className="w-full sm:w-auto border border-[var(--card-border)] text-gray-300 font-semibold text-base px-8 py-4 rounded-lg hover:border-[var(--neon-blue)]/50 hover:text-[var(--neon-blue)] transition-all"
-          >
-            See Sample Newsletter
-          </a>
+          {submitted ? (
+            <div className="bg-[var(--bg-card)] border border-[var(--accent-green)]/30 rounded-lg px-6 py-4 max-w-[480px] mx-auto">
+              <p className="text-[var(--accent-green)] font-semibold text-sm">
+                ✓ You&apos;re in. First picks hit your inbox at 6 AM ET.
+              </p>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col sm:flex-row max-w-[480px] mx-auto"
+            >
+              <input
+                type="email"
+                placeholder="you@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="flex-1 bg-[var(--bg-card)] border border-[#2A2A3E] text-white text-base px-4 py-3 rounded-lg sm:rounded-r-none sm:border-r-0 placeholder:text-[var(--text-muted)] font-[family-name:var(--font-inter)]"
+              />
+              <button
+                type="submit"
+                className="bg-[var(--accent-green)] text-[#0A0A0F] font-bold text-base px-6 py-3 rounded-lg sm:rounded-l-none hover:scale-[1.02] transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,255,135,0.3)] whitespace-nowrap mt-3 sm:mt-0"
+              >
+                Get Free Picks →
+              </button>
+            </form>
+          )}
         </motion.div>
 
-        {/* Stats Row */}
+        {/* Trust badges — Paula: green checkmarks, Inter 500, secondary text */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.65, duration: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto"
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6"
         >
-          {[
-            { value: "67%", label: "Prop Hit Rate" },
-            { value: "6AM", label: "Daily Delivery" },
-            { value: "$0", label: "To Start Free" },
-            { value: "24/7", label: "AI Scanning" },
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="stat-number text-2xl sm:text-3xl font-black mb-1">
-                {stat.value}
-              </div>
-              <div className="text-xs sm:text-sm text-gray-500 font-medium uppercase tracking-wider">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+          {["Free daily picks", "No credit card", "Cancel anytime"].map(
+            (text) => (
+              <span
+                key={text}
+                className="flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)]"
+              >
+                <svg className="w-4 h-4 text-[var(--accent-green)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                </svg>
+                {text}
+              </span>
+            )
+          )}
+        </motion.div>
+
+        {/* Scroll indicator — Paula: bounce, muted color */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 bounce-down"
+        >
+          <span className="text-xs text-[var(--text-muted)]">
+            See how it works
+          </span>
+          <ChevronDown className="w-4 h-4 text-[var(--text-muted)]" />
         </motion.div>
       </div>
     </section>

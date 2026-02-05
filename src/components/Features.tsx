@@ -1,112 +1,113 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  Crosshair,
+  BarChart3,
+  Zap,
+  Trophy,
+  Wallet,
+  Bell,
+} from "lucide-react";
 
+/* Paula's spec: Lucide icons, NOT emoji. Line-art, consistent weight. */
 const features = [
   {
-    icon: "🤖",
-    title: "AI-Powered Analysis",
+    Icon: Crosshair,
+    title: "AI-Analyzed Picks",
     description:
-      "Our models process thousands of data points — injury reports, weather, ref tendencies, historical matchups — to find edges the books miss.",
-    accent: "green" as const,
+      "Every pick runs through our models. No gut feelings, no hot takes — just data.",
   },
   {
-    icon: "📊",
-    title: "Prop Model Engine",
-    description:
-      "Player prop projections built from snap counts, usage rates, and defensive matchup data. We don't guess — we model.",
-    accent: "blue" as const,
-  },
-  {
-    icon: "📈",
+    Icon: BarChart3,
     title: "Line Movement Tracking",
     description:
-      "Know where the sharp money is going before the public catches up. Get alerts when lines move significantly across major books.",
-    accent: "green" as const,
+      "See where the sharp money is going before you bet. Reverse line movement alerts included.",
   },
   {
-    icon: "⚡",
-    title: "6AM Daily Delivery",
+    Icon: Zap,
+    title: "Prop Models",
     description:
-      "Full slate analysis in your inbox before your morning coffee. NFL, NBA, and more — every day during season.",
-    accent: "blue" as const,
+      "Player props broken down with probability scores. Snap counts, usage rates, matchup data.",
   },
   {
-    icon: "🎯",
+    Icon: Trophy,
+    title: "Full Slate Coverage",
+    description:
+      "NFL, NBA, and more — every game that matters, analyzed and delivered before first pitch.",
+  },
+  {
+    Icon: Wallet,
     title: "Bankroll Strategy",
     description:
-      "Unit-based recommendations with confidence ratings. We tell you how much to risk, not just what to bet.",
-    accent: "green" as const,
+      "Unit sizing and risk management built into every pick. We tell you how much, not just what.",
   },
   {
-    icon: "🔔",
-    title: "Live Game Alerts",
+    Icon: Bell,
+    title: "Live Alerts (Pro)",
     description:
-      "VIP members get real-time in-game opportunities pushed to their phone. When the model spots value mid-game, you know instantly.",
-    accent: "blue" as const,
+      "Line moves and injury news that change the play — pushed to you in real time.",
   },
 ];
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.08 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" as const } },
 };
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 lg:py-28 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
+    <section id="how-it-works" className="py-24 lg:py-32 px-5 md:px-6">
+      <div className="max-w-[1200px] mx-auto">
+        {/* Section header — Paula: centered, tight */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 bg-[var(--neon-blue)]/10 border border-[var(--neon-blue)]/20 rounded-full px-4 py-1.5 mb-6">
-            <span className="text-xs font-semibold text-[var(--neon-blue)] uppercase tracking-wider">
-              What You Get
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
-            Not picks.{" "}
-            <span className="text-[var(--neon-blue)] glow-blue-text">
-              Intelligence.
-            </span>
+          <h2
+            className="text-[24px] md:text-[36px] lg:text-[42px] font-[700] tracking-[-0.01em] leading-[1.2] mb-4"
+            style={{ fontFamily: "'Inter Tight', sans-serif" }}
+          >
+            What&apos;s Inside Every Newsletter
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-base sm:text-lg">
-            Every &quot;picks&quot; service gives you a team name and a prayer. We give
-            you the data, the model, and the reasoning — so you can bet smarter.
+          <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-[500px] mx-auto">
+            Real analysis. Real data. Real edge.
           </p>
         </motion.div>
 
-        {/* Feature Grid */}
+        {/* Feature grid — Paula: 3x2, dark cards, Lucide icons */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
         >
-          {features.map((feature, i) => (
+          {features.map((f, i) => (
             <motion.div
               key={i}
               variants={item}
-              className={`group p-6 rounded-xl bg-[var(--card-bg)] border border-[var(--card-border)] hover:border-[var(--neon-${feature.accent})]/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(${feature.accent === "green" ? "57,255,20" : "0,212,255"},0.08)]`}
+              className="group bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-5 md:p-6 hover:border-[var(--border-hover)] hover:-translate-y-0.5 transition-all duration-300"
             >
-              <div className="text-3xl mb-4">{feature.icon}</div>
+              <f.Icon
+                className="w-8 h-8 text-[var(--accent-green)] mb-4 stroke-[1.5]"
+              />
               <h3
-                className={`text-lg font-bold mb-2 group-hover:text-[var(--neon-${feature.accent})] transition-colors`}
+                className="text-lg md:text-xl font-bold text-white mb-2"
+                style={{ fontFamily: "'Inter Tight', sans-serif" }}
               >
-                {feature.title}
+                {f.title}
               </h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                {feature.description}
+              <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                {f.description}
               </p>
             </motion.div>
           ))}

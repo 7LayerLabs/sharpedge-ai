@@ -1,206 +1,199 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Check, X } from "lucide-react";
 
 const tiers = [
   {
-    name: "Free",
+    name: "FREE",
     price: "$0",
     period: "forever",
-    description: "Get your feet wet. Daily picks delivered free.",
+    description: "Get your feet wet with daily picks.",
     features: [
-      "2-3 featured picks daily",
-      "Basic AI analysis",
-      "Game day email alerts",
-      "Weekly recap",
+      { text: "2-3 daily picks", included: true },
+      { text: "Basic analysis", included: true },
+      { text: "Email delivery", included: true },
+      { text: "Full slate coverage", included: false },
+      { text: "Prop models", included: false },
+      { text: "Live alerts", included: false },
     ],
-    notIncluded: [
-      "Full slate analysis",
-      "Prop model access",
-      "Line movement alerts",
-      "Live game alerts",
-      "Community access",
-    ],
-    cta: "Start Free",
-    ctaLink: "#signup",
-    popular: false,
-    accent: "gray",
+    cta: "Get Started Free",
+    ctaStyle: "outline" as const,
+    badge: null,
+    borderColor: "border-[var(--border)]",
+    shadow: "",
+    scale: "",
   },
   {
-    name: "Pro",
+    name: "PRO",
     price: "$14.99",
     period: "/mo",
     description: "For serious bettors who want the full picture.",
     features: [
-      "Full daily slate analysis",
-      "AI prop model projections",
-      "Line movement alerts",
-      "Bankroll management tools",
-      "Confidence-rated picks",
-      "NFL + NBA + futures coverage",
-      "Weekly deep dive reports",
+      { text: "Full daily slate analysis", included: true },
+      { text: "AI prop model projections", included: true },
+      { text: "Line movement alerts", included: true },
+      { text: "Bankroll management tools", included: true },
+      { text: "Confidence-rated picks", included: true },
+      { text: "NFL + NBA + futures", included: true },
+      { text: "Weekly deep dive reports", included: true },
+      { text: "Live in-game alerts", included: false },
+      { text: "Community access", included: false },
     ],
-    notIncluded: ["Live in-game alerts", "Direct community access"],
     cta: "Go Pro →",
-    ctaLink: "#",
-    popular: true,
-    accent: "green",
+    ctaStyle: "green" as const,
+    badge: "MOST POPULAR",
+    borderColor: "border-[var(--accent-green)]",
+    shadow: "shadow-[0_0_40px_rgba(0,255,135,0.15)]",
+    scale: "lg:scale-105",
   },
   {
     name: "VIP",
     price: "$49.99",
     period: "/mo",
-    description: "The full arsenal. For those who bet to win.",
+    description: "The full arsenal. All access, all edges.",
     features: [
-      "Everything in Pro",
-      "Live in-game opportunity alerts",
-      "Direct community access (Discord)",
-      "1-on-1 bankroll strategy session/mo",
-      "Early access to model updates",
-      "DFS optimal lineups",
-      "Priority support",
+      { text: "Everything in Pro", included: true },
+      { text: "Live in-game alerts", included: true },
+      { text: "Discord community access", included: true },
+      { text: "1-on-1 bankroll strategy/mo", included: true },
+      { text: "Early access to model updates", included: true },
+      { text: "DFS optimal lineups", included: true },
+      { text: "Priority support", included: true },
     ],
-    notIncluded: [],
-    cta: "Go VIP 🔥",
-    ctaLink: "#",
-    popular: false,
-    accent: "blue",
+    cta: "Go VIP",
+    ctaStyle: "gold" as const,
+    badge: "ALL ACCESS",
+    borderColor: "border-[var(--accent-gold)]",
+    shadow: "shadow-[0_0_40px_rgba(255,215,0,0.1)]",
+    scale: "",
   },
 ];
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.15 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-20 lg:py-28 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
+    <section id="pricing" className="py-24 lg:py-32 px-5 md:px-6">
+      <div className="max-w-[1200px] mx-auto">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 bg-[var(--neon-green)]/10 border border-[var(--neon-green)]/20 rounded-full px-4 py-1.5 mb-6">
-            <span className="text-xs font-semibold text-[var(--neon-green)] uppercase tracking-wider">
-              Pricing
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
-            Pick your{" "}
-            <span className="text-[var(--neon-green)] glow-green-text">
-              edge.
-            </span>
+          <h2
+            className="text-[24px] md:text-[36px] lg:text-[42px] font-[700] tracking-[-0.01em] leading-[1.2] mb-4"
+            style={{ fontFamily: "'Inter Tight', sans-serif" }}
+          >
+            Choose Your Edge
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-base sm:text-lg">
-            Start free. Upgrade when you&apos;re ready to get serious. Cancel anytime — no lock-in, no BS.
+          <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-[500px] mx-auto">
+            Start free. Upgrade when you&apos;re winning.
           </p>
         </motion.div>
 
-        {/* Pricing Cards */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-start"
-        >
+        {/* Pricing cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 items-start">
           {tiers.map((tier, i) => (
             <motion.div
               key={i}
-              variants={item}
-              className={`relative rounded-2xl p-6 lg:p-8 ${
-                tier.popular
-                  ? "pricing-popular lg:scale-105 lg:-my-4 z-10"
-                  : "bg-[var(--card-bg)] border border-[var(--card-border)]"
-              }`}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: 0.5,
+                ease: "easeOut",
+                delay: i === 1 ? 0.1 : 0,
+              }}
+              className={`relative bg-[var(--bg-card)] border-2 ${tier.borderColor} rounded-2xl p-6 md:p-8 ${tier.shadow} ${tier.scale} z-${i === 1 ? "10" : "0"}`}
             >
-              {tier.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[var(--neon-green)] text-black font-extrabold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider">
-                  Most Popular
+              {/* Badge */}
+              {tier.badge && (
+                <div
+                  className={`absolute -top-3.5 left-1/2 -translate-x-1/2 text-[11px] font-bold px-4 py-1 rounded-full uppercase tracking-[0.08em] ${
+                    tier.ctaStyle === "green"
+                      ? "bg-[var(--accent-green)] text-[#0A0A0F]"
+                      : "bg-[var(--accent-gold)] text-[#0A0A0F]"
+                  }`}
+                >
+                  {tier.badge}
                 </div>
               )}
 
-              {/* Tier Header */}
-              <div className="mb-6">
-                <h3
-                  className={`text-lg font-bold mb-2 ${
-                    tier.accent === "green"
-                      ? "text-[var(--neon-green)]"
-                      : tier.accent === "blue"
-                        ? "text-[var(--neon-blue)]"
-                        : "text-gray-300"
-                  }`}
-                >
-                  {tier.name}
-                </h3>
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="text-4xl font-black">{tier.price}</span>
-                  <span className="text-gray-500 text-sm">{tier.period}</span>
-                </div>
-                <p className="text-gray-400 text-sm">{tier.description}</p>
+              {/* Tier name */}
+              <div className="text-xs font-bold tracking-[0.08em] text-[var(--text-secondary)] uppercase mb-4">
+                {tier.name}
               </div>
 
-              {/* CTA */}
+              {/* Price — Paula: JetBrains Mono 700, 48px */}
+              <div className="flex items-baseline gap-1 mb-2">
+                <span
+                  className="text-[40px] md:text-[48px] font-bold text-white leading-none"
+                  style={{ fontFamily: "var(--font-mono), monospace" }}
+                >
+                  {tier.price}
+                </span>
+                <span className="text-sm text-[var(--text-secondary)]">
+                  {tier.period}
+                </span>
+              </div>
+              <p className="text-sm text-[var(--text-secondary)] mb-6">
+                {tier.description}
+              </p>
+
+              {/* Divider */}
+              <div className="h-px bg-[var(--border)] mb-6" />
+
+              {/* Features */}
+              <div className="space-y-3 mb-8">
+                {tier.features.map((f, fi) => (
+                  <div key={fi} className="flex items-start gap-2.5">
+                    {f.included ? (
+                      <Check className="w-4 h-4 text-[var(--accent-green)] mt-0.5 flex-shrink-0" />
+                    ) : (
+                      <X className="w-4 h-4 text-[var(--text-muted)] mt-0.5 flex-shrink-0" />
+                    )}
+                    <span
+                      className={`text-[15px] ${
+                        f.included
+                          ? "text-[var(--text-secondary)]"
+                          : "text-[var(--text-muted)]"
+                      }`}
+                    >
+                      {f.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Button — Paula: full-width, 48px, per tier style */}
               <a
-                href={tier.ctaLink}
-                className={`block w-full text-center font-bold text-sm py-3.5 rounded-lg mb-6 transition-all ${
-                  tier.popular
-                    ? "bg-[var(--neon-green)] text-black hover:shadow-[0_0_30px_rgba(57,255,20,0.4)]"
-                    : tier.accent === "blue"
-                      ? "bg-[var(--neon-blue)] text-black hover:shadow-[0_0_30px_rgba(0,212,255,0.4)]"
-                      : "bg-[var(--surface)] text-gray-300 border border-[var(--card-border)] hover:border-[var(--neon-green)]/30 hover:text-[var(--neon-green)]"
+                href={tier.ctaStyle === "outline" ? "#hero-signup" : "#"}
+                className={`block w-full text-center font-bold text-sm py-3 rounded-lg transition-all duration-200 hover:scale-[1.02] ${
+                  tier.ctaStyle === "green"
+                    ? "bg-[var(--accent-green)] text-[#0A0A0F] hover:shadow-[0_0_20px_rgba(0,255,135,0.3)] pulse-cta"
+                    : tier.ctaStyle === "gold"
+                      ? "bg-[var(--accent-gold)] text-[#0A0A0F] hover:shadow-[0_0_20px_rgba(255,215,0,0.3)]"
+                      : "bg-transparent text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--border-hover)] hover:text-white"
                 }`}
               >
                 {tier.cta}
               </a>
-
-              {/* Features */}
-              <div className="space-y-3">
-                {tier.features.map((feature, fi) => (
-                  <div key={fi} className="flex items-start gap-2">
-                    <span className="text-[var(--neon-green)] mt-0.5 text-sm flex-shrink-0">
-                      ✓
-                    </span>
-                    <span className="text-sm text-gray-300">{feature}</span>
-                  </div>
-                ))}
-                {tier.notIncluded.map((feature, fi) => (
-                  <div key={fi} className="flex items-start gap-2">
-                    <span className="text-gray-600 mt-0.5 text-sm flex-shrink-0">
-                      ✗
-                    </span>
-                    <span className="text-sm text-gray-600">{feature}</span>
-                  </div>
-                ))}
-              </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Guarantee */}
-        <motion.div
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center mt-10 text-xs text-[var(--text-muted)]"
         >
-          <p className="text-gray-500 text-sm">
-            🔒 Stripe-secured payments. Cancel anytime with one click.
-            <br />
-            <span className="text-gray-600">
-              Not satisfied? Email us within 7 days for a full refund. No questions asked.
-            </span>
-          </p>
-        </motion.div>
+          🔒 Stripe-secured payments. Cancel anytime with one click. 7-day
+          money-back guarantee.
+        </motion.p>
       </div>
     </section>
   );
